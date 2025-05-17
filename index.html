@@ -1,0 +1,195 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PenguFi Pass</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #e0f7ff, #b2e3f5);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .nft-card {
+      background: linear-gradient(145deg, #ffffff, #e6f7ff);
+      border: 2px solid #8edaff;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0, 153, 255, 0.3);
+      overflow: hidden;
+      width: 360px;
+      max-width: 90%;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .nft-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 153, 255, 0.5);
+    }
+
+    .nft-image img {
+      width: 100%;
+      border-bottom: 2px solid #8edaff;
+      border-radius: 25px 25px 0 0;
+    }
+
+    .nft-details {
+      padding: 20px;
+    }
+
+    .nft-details h2 {
+      margin: 0;
+      font-size: 30px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+    }
+
+    .tagline {
+      margin: 10px 0;
+      font-weight: bold;
+      font-size: 15px;
+      color: #00aaff;
+      text-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+    }
+
+    .description {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 20px;
+      text-shadow: 0 0 4px rgba(173, 216, 230, 0.4);
+      line-height: 1.5;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #005577;
+      text-shadow: 0 0 3px rgba(0, 153, 255, 0.2);
+    }
+
+    .info strong {
+      color: #007acc;
+      text-shadow: 0 0 3px rgba(0, 153, 255, 0.3);
+    }
+
+    .mint-btn {
+      padding: 12px 25px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      border: none;
+      color: white;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.2s;
+      box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .mint-btn:hover {
+      box-shadow: 0 0 20px rgba(0, 153, 255, 0.8);
+      transform: scale(1.05);
+    }
+
+    .notify-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 12px 25px;
+      background: linear-gradient(to right, #ff6b6b, #ff2e63);
+      border: none;
+      color: white;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(255, 46, 99, 0.5);
+      transition: box-shadow 0.3s ease, transform 0.2s;
+      animation: pulseGlow 1.5s ease-in-out infinite;
+    }
+
+    .notify-btn:hover {
+      box-shadow: 0 0 20px rgba(255, 46, 99, 0.8);
+      transform: scale(1.05);
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 10px rgba(255, 46, 99, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(255, 46, 99, 0.8); }
+      100% { box-shadow: 0 0 10px rgba(255, 46, 99, 0.5); }
+    }
+  </style>
+</head>
+<body>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdYsHbd3ab3RoT3Bp4rf4FvMNCVzbX4w96UEjACP4r7WkUyYg/viewform?usp=header" class="notify-btn">Claim WL</a>
+  <div class="nft-card">
+    <div class="nft-image">
+      <img src="https://iili.io/34LzaPp.jpg" alt="PenguFi Pass NFT">
+    </div>
+    <div class="nft-details">
+      <h2>PenguFi Pass</h2>
+      <p class="tagline">❄️ The chillest pass in DeFi 🐧</p>
+      <p class="description">
+        Only 699 will ever exist. Holders gain whitelist access, early staking power, and frosty rewards. Step into the iceberg before it melts!
+      </p>
+      <div class="info">
+        <span>Supply: <strong>699</strong></span>
+        <span>Status: <strong>Whitelist Sale</strong></span>
+      </div>
+      <a href="https://www.tradeport.xyz/sui/collection/0xf7048255637630136351f3becd6c7aa8a2041f856e4ea03e07addc06e6ae4d40?tab=mint&bottomTab=trades&mintTokenId=5d26e54c-7ab6-4369-bb70-53b51135de83" class="mint-btn">Mint Now</a>
+    </div>
+  </div>
+</body>
+</html>
