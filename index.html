@@ -42,154 +42,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PenguFi Pass</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at top, #e0f7ff, #b2e3f5);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      position: relative;
-    }
-
-    .nft-card {
-      background: linear-gradient(145deg, #ffffff, #e6f7ff);
-      border: 2px solid #8edaff;
-      border-radius: 25px;
-      box-shadow: 0 10px 30px rgba(0, 153, 255, 0.3);
-      overflow: hidden;
-      width: 360px;
-      max-width: 90%;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .nft-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 15px 40px rgba(0, 153, 255, 0.5);
-    }
-
-    .nft-image img {
-      width: 100%;
-      border-bottom: 2px solid #8edaff;
-      border-radius: 25px 25px 0 0;
-    }
-
-    .nft-details {
-      padding: 20px;
-    }
-
-    .nft-details h2 {
-      margin: 0;
-      font-size: 30px;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
-    }
-
-    .tagline {
-      margin: 10px 0;
-      font-weight: bold;
-      font-size: 15px;
-      color: #00aaff;
-      text-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
-    }
-
-    .description {
-      font-size: 14px;
-      color: #333;
-      margin-bottom: 20px;
-      text-shadow: 0 0 4px rgba(173, 216, 230, 0.4);
-      line-height: 1.5;
-    }
-
-    .info {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
-      font-size: 14px;
-      color: #005577;
-      text-shadow: 0 0 3px rgba(0, 153, 255, 0.2);
-    }
-
-    .info strong {
-      color: #007acc;
-      text-shadow: 0 0 3px rgba(0, 153, 255, 0.3);
-    }
-
-    .mint-btn {
-      padding: 12px 25px;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      border: none;
-      color: white;
-      border-radius: 30px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: box-shadow 0.3s ease, transform 0.2s;
-      box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .mint-btn:hover {
-      box-shadow: 0 0 20px rgba(0, 153, 255, 0.8);
-      transform: scale(1.05);
-    }
-
-    .notify-btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 12px 25px;
-      background: linear-gradient(to right, #ff6b6b, #ff2e63);
-      border: none;
-      color: white;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 0 10px rgba(255, 46, 99, 0.5);
-      transition: box-shadow 0.3s ease, transform 0.2s;
-      animation: pulseGlow 1.5s ease-in-out infinite;
-    }
-
-    .notify-btn:hover {
-      box-shadow: 0 0 20px rgba(255, 46, 99, 0.8);
-      transform: scale(1.05);
-    }
-
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 10px rgba(255, 46, 99, 0.5); }
-      50% { box-shadow: 0 0 20px rgba(255, 46, 99, 0.8); }
-      100% { box-shadow: 0 0 10px rgba(255, 46, 99, 0.5); }
-    }
-  </style>
+  <title>PenguFi - Chill with Utility</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Note: Add Hero Typography font link here if available -->
 </head>
 <body>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdYsHbd3ab3RoT3Bp4rf4FvMNCVzbX4w96UEjACP4r7WkUyYg/viewform?usp=header" class="notify-btn">Claim WL</a>
-  <div class="nft-card">
-    <div class="nft-image">
-      <img src="https://iili.io/34LzaPp.jpg" alt="PenguFi Pass NFT">
-    </div>
-    <div class="nft-details">
-      <h2>PenguFi Pass</h2>
-      <p class="tagline">❄️ The chillest pass in DeFi 🐧</p>
-      <p class="description">
-        Only 699 will ever exist. Holders gain whitelist access, early staking power, and frosty rewards. Step into the iceberg before it melts!
-      </p>
-      <div class="info">
-        <span>Supply: <strong>699</strong></span>
-        <span>Status: <strong>Whitelist Sale</strong></span>
+  <section id="home" class="hero fade-in">
+    <h1><span class="highlight">PenguFi</span> is Here!</h1>
+    <p>A cute universe of penguins with real utility</p>
+    <button onclick="alert('Mint Coming Soon!')">Mint Now</button>
+  </section>
+  
+  <section id="blog" class="fade-in">
+    <h2>Latest from the Igloo 🐧</h2>
+    <div class="blog-slider">
+      <div class="card">
+        <h3>PenguFi Launches!</h3>
+        <p>The cutest NFT collection is now live on Base network.</p>
       </div>
-      <a href="https://www.tradeport.xyz/sui/collection/0xf7048255637630136351f3becd6c7aa8a2041f856e4ea03e07addc06e6ae4d40?tab=mint&bottomTab=trades&mintTokenId=5d26e54c-7ab6-4369-bb70-53b51135de83" class="mint-btn">Mint Now</a>
+      <div class="card">
+        <h3>Staking is Coming</h3>
+        <p>Stake your penguins and earn juicy $Fish rewards every day!</p>
+      </div>
+      <div class="card">
+        <h3>Community Contest</h3>
+        <p>Join our fan art contest and win exclusive NFTs.</p>
+      </div>
+      <div class="card">
+        <h3>PenguFi Merch</h3>
+        <p>Our official merchandise store is launching next week!</p>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section id="gallery" class="fade-in">
+    <h2>Meet the Penguins</h2>
+    <div class="gallery-container">
+      <div class="gallery-track">
+        <div class="gallery-slide">
+          <img src="https://iili.io/3LMqqI1.png" alt="Penguin 1 - Cool NFT character" />
+        </div>
+        <div class="gallery-slide">
+          <img src="https://iili.io/3LMqKmP.png" alt="Penguin 2 - Stylish NFT character" />
+        </div>
+        <div class="gallery-slide">
+          <img src="https://iili.io/3LMqFkB.png" alt="Penguin 3 - Unique NFT character" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap" class="fade-in">
+    <h2>Roadmap</h2>
+    <ul>
+      <li><strong>Phase 1:</strong> Launch cute penguins on Base</li>
+      <li><strong>Phase 2:</strong> NFT staking and $Fish rewards</li>
+      <li><strong>Phase 3:</strong> Marketplace, merch, and games</li>
+    </ul>
+  </section>
+
+  <section id="team" class="fade-in">
+    <h2>Our Team</h2>
+    <div class="members">
+      <div class="member">
+        <img src="https://iili.io/38oz88b.png" alt="PenguMaster - Founder and Artist" />
+        <p><strong>PenguMaster</strong><br/>Founder & Artist</p>
+      </div>
+      <div class="member">
+        <img src="https://iili.io/38oz88b.png" alt="CodePengu - Blockchain Developer" />
+        <p><strong>CodePengu</strong><br/>Blockchain Dev</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="socials" class="fade-in">
+    <p>Follow us:</p>
+    <a href="https://twitter.com" target="_blank">Twitter</a> |
+    <a href="https://discord.com" target="_blank">Discord</a> |
+    <a href="https://pengufi-docs.example.com" target="_blank">Docs</a>
+    <p>© 2025 PenguFi. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
