@@ -16,22 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setInterval(autoSlideBlog, 50);
 
-  // Gallery Carousel (Right to Left, same animation as Blog Slider)
+  // Gallery Carousel (Right to Left, showing full images)
   const track = document.querySelector('.gallery-track');
-  let galleryScrollAmount = track ? track.scrollWidth : 0;
+  const slides = track ? track.querySelectorAll('.gallery-slide') : [];
+  let index = 0;
 
   function autoSlideGallery() {
-    if (track) {
-      galleryScrollAmount -= 2;
-      track.scrollLeft = galleryScrollAmount;
-      if (galleryScrollAmount <= 0) {
-        galleryScrollAmount = track.scrollWidth;
-        track.scrollLeft = galleryScrollAmount;
-      }
+    if (track && slides.length > 0) {
+      index = (index + 1) % slides.length; // Move to next slide
+      track.style.transform = `translateX(-${index * 100}%)`;
     }
   }
 
-  setInterval(autoSlideGallery, 50);
+  setInterval(autoSlideGallery, 3500); // Change slide every 3.5 seconds
 
   // Scroll Animation
   window.addEventListener('scroll', () => {
