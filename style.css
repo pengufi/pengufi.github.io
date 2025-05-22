@@ -15,17 +15,15 @@ body {
 
 .hero h1 {
   font-size: 3.5em;
-  font-family: 'Quicksand', sans-serif; /* Fallback: Replace with Hero Typography */
+  font-family: 'Playfair Display', serif;
   color: #5C6BC0;
   animation: rollIn 1.2s ease-out forwards;
-  opacity: 0;
 }
 
 .hero p {
   font-size: 1.4em;
   margin-top: 10px;
   animation: fadeIn 2s ease-out forwards;
-  opacity: 0;
 }
 
 .hero .highlight {
@@ -54,31 +52,27 @@ section {
 }
 
 #gallery h2 {
-  font-family: 'Quicksand', sans-serif; /* Fallback: Replace with Hero Typography */
+  font-family: 'Playfair Display', serif;
   color: #26A69A;
   animation: rollIn 1.2s ease-out forwards;
-  opacity: 0;
 }
 
 #blog h2 {
-  font-family: 'Quicksand', sans-serif; /* Fallback: Replace with Hero Typography */
+  font-family: 'Playfair Display', serif;
   color: #FF7043;
   animation: rollIn 1.2s ease-out forwards;
-  opacity: 0;
 }
 
 #roadmap h2 {
-  font-family: 'Quicksand', sans-serif; /* Fallback: Replace with Hero Typography */
+  font-family: 'Playfair Display', serif;
   color: #AB47BC;
   animation: rollIn 1.2s ease-out forwards;
-  opacity: 0;
 }
 
 #team h2 {
-  font-family: 'Quicksand', sans-serif; /* Fallback: Replace with Hero Typography */
+  font-family: 'Playfair Display', serif;
   color: #42A5F5;
   animation: rollIn 1.2s ease-out forwards;
-  opacity: 0;
 }
 
 .gallery-container {
@@ -92,7 +86,6 @@ section {
   display: flex;
   transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   will-change: transform;
-  flex-direction: row-reverse; /* Right-to-left direction */
 }
 
 .gallery-slide {
@@ -111,7 +104,7 @@ section {
   max-height: 100%;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  object-fit: contain; /* Ensure images fit without cropping */
+  object-fit: contain;
 }
 
 .members {
@@ -123,8 +116,10 @@ section {
 
 .member img {
   width: 150px;
+  height: 150px;
   border-radius: 50%;
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  object-fit: cover;
 }
 
 footer {
@@ -145,7 +140,10 @@ footer {
   scroll-behavior: smooth;
   gap: 20px;
   padding: 20px;
-  flex-direction: row-reverse; /* Right-to-left direction */
+  position: relative;
+  scroll-snap-type: x mandatory;
+  transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  will-change: transform;
 }
 
 .blog-slider::-webkit-scrollbar {
@@ -160,6 +158,7 @@ footer {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
   min-height: 180px;
+  scroll-snap-align: start;
 }
 
 .card:hover {
@@ -167,8 +166,214 @@ footer {
 }
 
 .card h3 {
-  margin-top: 0;
+  margin-top: 10px;
   color: #0077cc;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.dot-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dot.active {
+  background: #0077cc;
+}
+
+/* Roadmap Timeline Styles */
+.roadmap-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.roadmap-timeline::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: linear-gradient(to bottom, #0077cc, #40c4ff);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.roadmap-phase {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 60px 0;
+  width: 100%;
+}
+
+.roadmap-phase:nth-child(odd) {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.roadmap-phase:nth-child(even) {
+  flex-direction: row;
+  text-align: left;
+}
+
+.roadmap-phase .icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  animation: bounceIcon 0.8s ease-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: transparent;
+}
+
+.roadmap-phase .icon:hover {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.roadmap-phase .icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+  background: transparent;
+}
+
+.roadmap-phase .content {
+  width: 45%;
+  background: linear-gradient(135deg, #ffffff, #e0e0e0);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.roadmap-phase .content:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #f0f0f0, #d0d0d0);
+  border-color: #0077cc;
+}
+
+.roadmap-phase:nth-child(odd) .content {
+  margin-right: 80px;
+}
+
+.roadmap-phase:nth-child(even) .content {
+  margin-left: 80px;
+}
+
+.roadmap-phase .content strong {
+  font-size: 1.3em;
+  display: block;
+  margin-bottom: 8px;
+  font-family: 'Playfair Display', serif;
+}
+
+.roadmap-phase .content p {
+  margin: 0;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+/* Phase Colors */
+.phase-1 .content { background: linear-gradient(135deg, #40c4ff, #0288d1); color: #fff; }
+.phase-1 .content:hover { background: linear-gradient(135deg, #0288d1, #40c4ff); }
+
+.phase-2 .content { background: linear-gradient(135deg, #66bb6a, #388e3c); color: #fff; }
+.phase-2 .content:hover { background: linear-gradient(135deg, #388e3c, #66bb6a); }
+
+.phase-3 .content { background: linear-gradient(135deg, #ef5350, #d32f2f); color: #fff; }
+.phase-3 .content:hover { background: linear-gradient(135deg, #d32f2f, #ef5350); }
+
+/* About Section Typewriter Animation */
+#about h2 {
+  color: #0077cc;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 3s steps(40, end) forwards;
+}
+
+#about p {
+  color: #0077cc;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: typewriter 3s steps(40, end) forwards 1s;
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .roadmap-timeline::before {
+    left: 30px;
+  }
+
+  .roadmap-phase {
+    flex-direction: row;
+    text-align: left;
+    margin: 40px 0;
+  }
+
+  .roadmap-phase:nth-child(odd),
+  .roadmap-phase:nth-child(even) {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .roadmap-phase .icon {
+    left: 30px;
+    transform: none;
+    width: 50px;
+    height: 50px;
+  }
+
+  .roadmap-phase .icon:hover {
+    transform: scale(1.1);
+  }
+
+  .roadmap-phase .icon img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .roadmap-phase .content {
+    width: calc(100% - 110px);
+    margin-left: 80px;
+    margin-right: 0;
+  }
 }
 
 @keyframes rollIn {
@@ -192,14 +397,16 @@ footer {
   50% { transform: translateY(-15px); }
 }
 
+@keyframes bounceIcon {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 .fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-in-out;
+  animation: fadeIn 1s ease-out forwards;
 }
 
 .fade-in.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1.05);
   animation: bounce 0.6s ease;
 }
