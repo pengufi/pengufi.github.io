@@ -41,160 +41,320 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PenguFi - Chill with Utility</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAST - Farcaster Mini App</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <section id="home" class="hero fade-in">
-    <h1><span class="highlight">PenguFi</span> is Here!</h1>
-    <p>A cute universe of penguins with real utility</p>
-    <button onclick="window.location.href='https://opensea.io/collection/pengufi/overview'">Mint Now</button>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <img src="https://iili.io/3mONB4f.png" alt="Cast Logo" id="headerLogo" />
+        <h1>CAST</h1>
+      </div>
+      <div class="header-right">
+        <img src="https://iili.io/3mONB4f.png" alt="Farcaster User" onclick="toggleDropdown()" id="userLogo" />
+        <div class="dropdown" id="userDropdown">
+          <button onclick="logout()">Logout</button>
+        </div>
+      </div>
+    </header>
 
-  <section id="about" class="fade-in">
-    <h2>About PenguFi</h2>
-    <p style="font-size: 1.2em; max-width: 800px; margin: 20px auto; line-height: 1.6;">
-      PenguFi is a vibrant NFT ecosystem built on the Abaster Network, where adorable penguins waddle into the world of decentralized finance and the metaverse. Each unique PenguFi NFT is more than just a collectible—it's your ticket to a thriving digital community with staking rewards, exclusive merchandise, and exciting games. Inspired by the spirit of blockchain innovation, PenguFi blends cuteness with utility to create a one-of-a-kind experience in the digital economy. Join the colony and dive into the future of NFTs! 🐧💸
-    </p>
-  </section>
-  
-  <section id="blog" class="fade-in">
-    <h2>PenguFi News Board🐧</h2>
-    <div class="blog-slider">
-      <div class="card">
-        <img src="https://iili.io/3Q87ODN.jpg" alt="Penguin for Launch Card" />
-        <h3>PenguFi mint is now live!</h3>
-        <p>Grab your exclusive relic during this limited-time event.
-Each NFT holds hidden surprises and unique rewards.
-Mint yours today and join the adventure ahead!</p>
+    <!-- Home Page -->
+    <div id="homePage" class="home-page">
+      <div class="logo-container">
+        <img src="https://iili.io/3mONB4f.png" alt="Cast Logo" class="logo" />
+        <canvas id="particleCanvas" width="120" height="120"></canvas>
       </div>
-      <div class="card">
-        <img src="https://iili.io/3Lrrc0J.png" alt="Penguin for Staking Card" />
-        <h3>uploading</h3>
-        <p>News is uploading</p>
+
+      <div class="balance">
+        <span id="castBalance">0</span> CAST
       </div>
-      <div class="card">
-        <img src="https://iili.io/3Lrrc0J.png" alt="Penguin for Contest Card" />
-        <h3>uploading</h3>
-        <p>News is uploading</p>
+
+      <button id="connectBtn">Connect Farcaster</button>
+      <button id="claimBtn" style="display:none;">Claim Tokens</button>
+
+      <div class="community-section">
+        <p>Join CAST Community</p>
+        <button>Join Now</button>
       </div>
-      <div class="card">
-        <img src="https://iili.io/3Lrrc0J.png" alt="Penguin for Merch Card" />
-        <h3>uploading</h3>
-        <p>News is uploading</p>
+
+      <div class="tasks-section">
+        <h2>Your Tasks</h2>
+        <div class="task-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Task Icon" />
+            <div class="task-info">
+              <p><a href="https://warpcast.com/cast" target="_blank" class="text-blue-400 hover:text-blue-300">Follow @CAST on Farcaster</a></p>
+              <p class="reward">+100 CAST</p>
+            </div>
+          </div>
+          <button class="check-btn" data-id="1" onclick="completeTask(1)" disabled>Check</button>
+        </div>
+        <div class="task-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Task Icon" />
+            <div class="task-info">
+              <p><a href="https://t.me/castcommunity" target="_blank" class="text-blue-400 hover:text-blue-300">Join the CAST Telegram group</a></p>
+              <p class="reward">+200 CAST</p>
+            </div>
+          </div>
+          <button class="check-btn" data-id="2" onclick="completeTask(2)" disabled>Check</button>
+        </div>
+        <div class="task-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Task Icon" />
+            <div class="task-info">
+              <p><a href="https://warpcast.com/~/compose" target="_blank" class="text-blue-400 hover:text-blue-300">Post a message with #CAST on Farcaster</a></p>
+              <p class="reward">+300 CAST</p>
+            </div>
+          </div>
+          <button class="check-btn" data-id="3" onclick="completeTask(3)" disabled>Check</button>
+        </div>
+        <div class="task-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Task Icon" />
+            <div class="task-info">
+              <p><a href="https://warpcast.com/~/invite" target="_blank" class="text-blue-400 hover:text-blue-300">Invite a friend to join CAST</a></p>
+              <p class="reward">+500 CAST</p>
+            </div>
+          </div>
+          <button class="check-btn" data-id="4" onclick="completeTask(4)" disabled>Check</button>
+        </div>
+        <div class="task-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Task Icon" />
+            <div class="task-info">
+              <p><a href="https://warpcast.com/~/settings" target="_blank" class="text-blue-400 hover:text-blue-300">Complete your profile on Farcaster</a></p>
+              <p class="reward">+100 CAST</p>
+            </div>
+          </div>
+          <button class="check-btn" data-id="5" onclick="completeTask(5)" disabled>Check</button>
+        </div>
+        <div class="task-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Task Icon" />
+            <div class="task-info">
+              <p><a href="https://t.me/castcommunity" target="_blank" class="text-blue-400 hover:text-blue-300">Participate in the CAST community chat</a></p>
+              <p class="reward">+200 CAST</p>
+            </div>
+          </div>
+          <button class="check-btn" data-id="6" onclick="completeTask(6)" disabled>Check</button>
+        </div>
+        <div class="task-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Task Icon" />
+            <div class="task-info">
+              <p><a href="javascript:void(0)" class="text-blue-400 hover:text-blue-300" onclick="shareReferLink()">Share your CAST referral link</a></p>
+              <p class="reward">+100 CAST</p>
+            </div>
+          </div>
+          <button class="check-btn" data-id="7" onclick="completeTask(7)" disabled>Check</button>
+        </div>
+      </div>
+
+      <div class="rewards-summary">
+        <h2>Rewards</h2>
+        <p>Completed Tasks: <span id="completedTasks">0</span> / 7</p>
+        <p>Total Rewards from Tasks: <span id="totalRewards">0</span> CAST</p>
       </div>
     </div>
-    <div class="dot-indicators">
-      <span class="dot" data-index="0"></span>
-      <span class="dot" data-index="1"></span>
-      <span class="dot" data-index="2"></span>
-      <span class="dot" data-index="3"></span>
-    </div>
-  </section>
 
-  <section id="gallery" class="fade-in">
-    <h2>Meet the Penguins</h2>
-    <div class="gallery-container">
-      <div class="gallery-track">
-        <div class="gallery-slide">
-          <img src="https://iili.io/3Q8DYb9.png" alt="Penguin 1 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3Q8DlWu.png" alt="Penguin 2 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3Q8Dcxe.png" alt="Penguin 3 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSz7xn.png" alt="Penguin 4 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3Q8DhOP.png" alt="Penguin 5 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSzhxe.jpg" alt="Penguin 6 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSzYVs.png" alt="Penguin 7 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSzwib.png" alt="Penguin 8 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSzS5B.png" alt="Penguin 9 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSzgb1.jpg" alt="Penguin 10 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSz4zF.jpg" alt="Penguin 11 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSzL0v.png" alt="Penguin 12 - Unique NFT character" />
-        </div>
-        <div class="gallery-slide">
-          <img src="https://iili.io/3QSzQgR.jpg" alt="Penguin 13 - Unique NFT character" />
-        </div>
+    <!-- Friends Page -->
+    <div id="friendsPage" class="friends-page">
+      <div class="invite-buttons">
+        <p>Invite Your Friends</p>
+        <p style="font-size: 0.9rem;">Share your invitation link and get 10% of friends' points</p>
+        <button class="share-btn" onclick="shareInvite()">Share Invite Link</button>
+        <button class="copy-btn" onclick="copyInvite()">Copy Invite Link</button>
       </div>
-    </div>
-  </section>
 
-  <section id="roadmap" class="fade-in">
-    <h2>🐧Roadmap Highlights</h2>
-    <div class="roadmap-timeline">
-      <div class="roadmap-phase phase-1">
-        <div class="icon">
-          <img src="https://iili.io/3L4i7Dl.png" alt="Phase 1 Icon" />
+      <h2>Invited Friends</h2>
+      <div class="friends-list">
+        <div class="friend-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Friend Icon" />
+            <div class="friend-info">
+              <p>user123</p>
+              <p class="earned">+24 CAST</p>
+            </div>
+          </div>
         </div>
-        <div class="content">
-          <strong>Phase 1</strong>
-          <p>Genesis Mint on Abstract Network</p>
+        <div class="friend-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Friend Icon" />
+            <div class="friend-info">
+              <p>user456</p>
+              <p class="earned">+402 CAST</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="roadmap-phase phase-2">
-        <div class="icon">
-          <img src="https://iili.io/3L4iEle.png" alt="Phase 2 Icon" />
+        <div class="friend-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Friend Icon" />
+            <div class="friend-info">
+              <p>user789</p>
+              <p class="earned">+488 CAST</p>
+            </div>
+          </div>
         </div>
-        <div class="content">
-          <strong>Phase 2</strong>
-          <p>XP Rewards System Launch,Staking + Mini Game Teaser </p>
+        <div class="friend-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Friend Icon" />
+            <div class="friend-info">
+              <p>user101</p>
+              <p class="earned">+201 CAST</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="roadmap-phase phase-3">
-        <div class="icon">
-          <img src="https://iili.io/3L4iAHG.png" alt="Phase 3 Icon" />
+        <div class="friend-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Friend Icon" />
+            <div class="friend-info">
+              <p>user202</p>
+              <p class="earned">+646 CAST</p>
+            </div>
+          </div>
         </div>
-        <div class="content">
-          <strong>Phase 3</strong>
-          <p>Multi-chain Expansion & Community Airdrops</p>
+        <div class="friend-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="Friend Icon" />
+            <div class="friend-info">
+              <p>user303</p>
+              <p class="earned">+384 CAST</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <section id="team" class="fade-in">
-    <h2>Pengufi Team</h2>
-    <div class="members">
-      <div class="member">
-        <img src="https://iili.io/3tqcR7R.jpg" alt="PenguMaster - Founder and Artist" />
-        <p><strong>de Jack akin</strong><br/>Co-founder & BD @dejack</p>
+    <!-- Leaderboard Page -->
+    <div id="leaderboardPage" class="leaderboard-page">
+      <h2>Leaderboard</h2>
+      <div class="top-rank">
+        <div class="podium-spot second">
+          <div class="user">
+            <img class="avatar" src="https://iili.io/3mONB4f.png" alt="User Avatar" />
+            <div class="info">🥈 user456<br><span>983,167 CAST</span></div>
+          </div>
+          <div class="platform">2</div>
+        </div>
+        <div class="podium-spot first">
+          <div class="user">
+            <img class="avatar" src="https://iili.io/3mONB4f.png" alt="User Avatar" />
+            <div class="info">🥇 user123<br><span>3,015,421 CAST</span></div>
+          </div>
+          <div class="platform">1</div>
+        </div>
+        <div class="podium-spot third">
+          <div class="user">
+            <img class="avatar" src="https://iili.io/3mONB4f.png" alt="User Avatar" />
+            <div class="info">🥉 user789<br><span>546,264 CAST</span></div>
+          </div>
+          <div class="platform">3</div>
+        </div>
       </div>
-      <div class="member">
-        <img src="https://iili.io/3tqc5ep.jpg" alt="CodePengu - Blockchain Developer" />
-        <p><strong>Premi Ais</strong><br/>Developer & Community Manager @premi</p>
+
+      <div class="rank-summary">
+        <p>You're ranked #588</p>
+        <p class="earned">Earned <span id="totalEarned">0</span> CAST</p>
+      </div>
+
+      <div class="leaderboard-list">
+        <div class="leaderboard-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="User Icon" />
+            <div class="leaderboard-info">
+              <p>#4 user101</p>
+              <p class="earned">479,308 CAST</p>
+            </div>
+          </div>
+        </div>
+        <div class="leaderboard-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="User Icon" />
+            <div class="leaderboard-info">
+              <p>#5 user202</p>
+              <p class="earned">436,877 CAST</p>
+            </div>
+          </div>
+        </div>
+        <div class="leaderboard-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="User Icon" />
+            <div class="leaderboard-info">
+              <p>#6 user303</p>
+              <p class="earned">412,749 CAST</p>
+            </div>
+          </div>
+        </div>
+        <div class="leaderboard-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="User Icon" />
+            <div class="leaderboard-info">
+              <p>#7 user404</p>
+              <p class="earned">358,743 CAST</p>
+            </div>
+          </div>
+        </div>
+        <div class="leaderboard-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="User Icon" />
+            <div class="leaderboard-info">
+              <p>#8 user505</p>
+              <p class="earned">315,007 CAST</p>
+            </div>
+          </div>
+        </div>
+        <div class="leaderboard-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="User Icon" />
+            <div class="leaderboard-info">
+              <p>#9 user606</p>
+              <p class="earned">286,374 CAST</p>
+            </div>
+          </div>
+        </div>
+        <div class="leaderboard-card">
+          <div class="task-left">
+            <img src="https://iili.io/3mONB4f.png" alt="User Icon" />
+            <div class="leaderboard-info">
+              <p>#10 user707</p>
+              <p class="earned">270,123 CAST</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <footer id="socials" class="fade-in">
-    <p>Follow us:</p>
-    <a href="https://x.com/redPenguFi" target="_blank">Twitter</a> |
-    <a href="https://t.me/redpengufi" target="_blank">Telegram</a> |
-    <a href="https://pengufi.gihub.io" target="_blank">Docs</a>
-    <p>© 2025 PenguFi. All rights reserved.</p>
-  </footer>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-item active" onclick="showPage('homePage')">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Home Icon" />
+        <span>Home</span>
+      </div>
+      <div class="nav-item" onclick="showPage('friendsPage')">
+        <img src="https://cdn-icons-png.flaticon.com/512/1665/1665680.png" alt="Friends Icon" />
+        <span>Friends</span>
+      </div>
+      <div class="nav-item" onclick="showPage('leaderboardPage')">
+        <img src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="Leaderboard Icon" />
+        <span>Leaderboard</span>
+      </div>
+    </nav>
+
+    <!-- Popup -->
+    <div id="popup" style="display:none;">
+      <div class="popup-content">
+        <h2>Connection Successful!</h2>
+        <p>Your Farcaster ID: <span id="userId"></span></p>
+        <p>Account Age: <span id="accountAge"></span> days</p>
+        <p>Available Tokens: <span id="availableTokens"></span></p>
+        <button onclick="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
